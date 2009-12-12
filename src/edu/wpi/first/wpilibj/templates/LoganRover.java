@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 
@@ -23,6 +24,8 @@ public class LoganRover extends IterativeRobot {
     private RobotDrive drivetrain;
     private Joystick joystickOne;
 
+    private Jaguar leftDrive, rightDrive;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -30,7 +33,10 @@ public class LoganRover extends IterativeRobot {
     public void robotInit() {
         joystickOne = new Joystick(1);
 
-        drivetrain = new RobotDrive(3, 1);
+        leftDrive = new Jaguar(3);
+        rightDrive = new Jaguar(1);
+
+        drivetrain = new RobotDrive(leftDrive, rightDrive);
         drivetrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
     }
 
