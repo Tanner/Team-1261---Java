@@ -7,7 +7,6 @@
 
 package robot;
 
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
@@ -53,6 +52,7 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        //TODO: Add old Logan Rover autonomous
         drivetrain.arcadeDrive(0, 0);
     }
 
@@ -61,6 +61,8 @@ public class LoganRover extends IterativeRobot {
      */
     public void teleopPeriodic() {
         drivetrain.arcadeDrive(joystickOne);
+
+        intake.doAction();
     }
     
 }
