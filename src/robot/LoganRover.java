@@ -7,6 +7,7 @@
 
 package robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,13 +22,16 @@ import edu.wpi.first.wpilibj.Victor;
  * directory.
  */
 public class LoganRover extends IterativeRobot {
+    private Joystick joystickOne;
+    private DigitalInput leftAutoSwitch;
+    private DigitalInput rightAutoSwitch;
+    
     private RobotDrive drivetrain;
     private Intake intake;
-    private Joystick joystickOne;
 
-    private Jaguar leftDrive, rightDrive; //Drivetrain Motors
-    private Victor intakeMotorOne, intakeMotorTwo; //Intake Motors
-    private Victor unobtaniumMotor; //Also part of intake system
+    private Jaguar leftDrive, rightDrive;           //Drivetrain Motors
+    private Victor intakeMotorOne, intakeMotorTwo;  //Intake Motors
+    private Victor unobtaniumMotor;                 //Also part of intake system
 
     /**
      * This function is run when the robot is first started up and should be
@@ -35,6 +39,8 @@ public class LoganRover extends IterativeRobot {
      */
     public void robotInit() {
         joystickOne = new Joystick(1);
+        leftAutoSwitch = new DigitalInput(1);
+        rightAutoSwitch = new DigitalInput(2);
 
         leftDrive = new Jaguar(3);
         rightDrive = new Jaguar(1);
@@ -53,7 +59,16 @@ public class LoganRover extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         //TODO: Add old Logan Rover autonomous
-        drivetrain.arcadeDrive(0, 0);
+        //drivetrain.arcadeDrive(0, 0);
+
+        if (leftAutoSwitch.get() == true)
+        {
+            //Put us into left autonomous
+        } else if (rightAutoSwitch.get() == true) {
+            //Put us into right autonomous
+        } else {
+            //Middle position
+        }
     }
 
     /**
