@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Victor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,9 +23,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
  */
 public class LoganRover extends IterativeRobot {
     private RobotDrive drivetrain;
+    private Intake intake;
     private Joystick joystickOne;
 
-    private Jaguar leftDrive, rightDrive;
+    private Jaguar leftDrive, rightDrive; //Drivetrain Motors
+    private Victor intakeMotorOne, intakeMotorTwo; //Intake Motors
+    private Victor unobtaniumMotor; //Also part of intake system
 
     /**
      * This function is run when the robot is first started up and should be
@@ -35,9 +39,14 @@ public class LoganRover extends IterativeRobot {
 
         leftDrive = new Jaguar(3);
         rightDrive = new Jaguar(1);
+        intakeMotorOne = new Victor(2);
+        intakeMotorTwo = new Victor(4);
+        unobtaniumMotor = new Victor(5);
 
         drivetrain = new RobotDrive(leftDrive, rightDrive);
         drivetrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+
+        intake = new Intake(joystickOne, intakeMotorOne, intakeMotorTwo, unobtaniumMotor);
     }
 
     /**
