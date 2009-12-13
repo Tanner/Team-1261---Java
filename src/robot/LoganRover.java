@@ -63,7 +63,7 @@ public class LoganRover extends IterativeRobot {
     }
 
     /**
-     * This function is called once in the beginning of autonomous.
+     * This function is called before the beginning of autonomous.
      */
     public void autonomousInit() {
         autoTimer.start();
@@ -73,7 +73,6 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        //TODO: Add old Logan Rover autonomous
         //TODO: Is SimpleRobot better for our autonomous? Do I need to call isAutonomous()?
         //TODO: Clean up repetitive code in autonomous
         getWatchdog().feed();
@@ -109,6 +108,13 @@ public class LoganRover extends IterativeRobot {
                 drivetrain.arcadeDrive(0, 1);
             }
         }
+    }
+
+    /*
+     * This function is called before the beginning of teleop
+     */
+    public void teleopInit() {
+        autoTimer.stop();
     }
 
     /**
