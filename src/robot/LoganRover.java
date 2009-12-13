@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -25,9 +26,11 @@ public class LoganRover extends IterativeRobot {
     private Joystick joystickOne;
     private DigitalInput leftAutoSwitch;
     private DigitalInput rightAutoSwitch;
+
+    private Timer autoTimer;                        //Normally would use match time, but can't find that.
     
-    private RobotDrive drivetrain;
-    private Intake intake;
+    private RobotDrive drivetrain;                  //Motors on Drivetrain
+    private Intake intake;                          //Intake System
 
     private Jaguar leftDrive, rightDrive;           //Drivetrain Motors
     private Victor intakeMotorOne, intakeMotorTwo;  //Intake Motors
@@ -42,6 +45,8 @@ public class LoganRover extends IterativeRobot {
         leftAutoSwitch = new DigitalInput(1);
         rightAutoSwitch = new DigitalInput(2);
 
+        autoTimer = new Timer();
+
         leftDrive = new Jaguar(3);
         rightDrive = new Jaguar(1);
         intakeMotorOne = new Victor(2);
@@ -55,9 +60,18 @@ public class LoganRover extends IterativeRobot {
     }
 
     /**
+     * This function is called once in the beginning of autonomous.
+     */
+    public void autonomousInit() {
+        autoTimer.start();
+    }
+
+    /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        getWatchdog().feed();
+
         //TODO: Add old Logan Rover autonomous
         drivetrain.arcadeDrive(0, 0);
 
@@ -75,6 +89,8 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        getWatchdog().feed();
+
         drivetrain.arcadeDrive(joystickOne);
 
         intake.doAction();
