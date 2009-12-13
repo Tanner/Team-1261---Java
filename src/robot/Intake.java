@@ -57,9 +57,6 @@ public class Intake {
         } else {
             //TODO: Put this function into a function
 
-            /*
-             * Push button switch for both fire and reverse buttons
-             */
             //Reverse Button
             if (joystick.getRawButton(3)) {
                 //Reverse button was hit
@@ -80,6 +77,29 @@ public class Intake {
                 intakeMode = previousMode;
                 previousMode = 0;
             }
+        }
+
+        switch (intakeMode) {
+            case -1:
+                //Reverse mode
+                beltSpeed = -1;
+                unobtaniumSpeed = 0;
+                break;
+            case 0:
+                //Stop mode
+                beltSpeed = 0;
+                unobtaniumSpeed = 0;
+                break;
+            case 1:
+                //Intake mode
+                beltSpeed = 1;
+                unobtaniumSpeed = -0.5;
+                break;
+            case 2:
+                //Fire mode
+                beltSpeed = 1;
+                unobtaniumSpeed = 1;
+                break;
         }
 
         //Put mode into action
