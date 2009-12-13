@@ -75,9 +75,9 @@ public class LoganRover extends IterativeRobot {
     public void autonomousPeriodic() {
         //TODO: Add old Logan Rover autonomous
         //TODO: Is SimpleRobot better for our autonomous? Do I need to call isAutonomous()?
+        //TODO: Clean up repetitive code in autonomous
         getWatchdog().feed();
 
-        //drivetrain.arcadeDrive(0, 0);
         double elapsedTime = autoTimer.get() * 0.001; //Convert time to milliseconds
 
         if (leftAutoSwitch.get() == true)
