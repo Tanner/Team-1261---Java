@@ -59,7 +59,7 @@ public class LoganRover extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         //TODO: Add old Logan Rover autonomous
-        //drivetrain.arcadeDrive(0, 0);
+        drivetrain.arcadeDrive(0, 0);
 
         if (leftAutoSwitch.get() == true)
         {
