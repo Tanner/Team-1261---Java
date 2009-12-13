@@ -23,6 +23,9 @@ import edu.wpi.first.wpilibj.Victor;
  * directory.
  */
 public class LoganRover extends IterativeRobot {
+    public static final double AUTO_CORNER_FORWARD_TIME = 2000;
+    public static final double AUTO_MIDDLE_FORWARD_TIME = 1000;
+
     private Joystick joystickOne;
     private DigitalInput leftAutoSwitch;
     private DigitalInput rightAutoSwitch;
@@ -70,18 +73,41 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        //TODO: Add old Logan Rover autonomous
+        //TODO: Is SimpleRobot better for our autonomous? Do I need to call isAutonomous()?
         getWatchdog().feed();
 
-        //TODO: Add old Logan Rover autonomous
-        drivetrain.arcadeDrive(0, 0);
+        //drivetrain.arcadeDrive(0, 0);
+        double elapsedTime = autoTimer.get() * 0.001; //Convert time to milliseconds
 
         if (leftAutoSwitch.get() == true)
         {
             //Put us into left autonomous
+            if (elapsedTime < AUTO_CORNER_FORWARD_TIME) {
+                //Move forward
+                drivetrain.arcadeDrive(1, 0);
+            } else {
+                //Spin!
+                drivetrain.arcadeDrive(0, 1);
+            }
         } else if (rightAutoSwitch.get() == true) {
             //Put us into right autonomous
+            if (elapsedTime < AUTO_CORNER_FORWARD_TIME) {
+                //Move forward
+                drivetrain.arcadeDrive(1, 0);
+            } else {
+                //Spin!
+                drivetrain.arcadeDrive(0, -1);
+            }
         } else {
             //Middle position
+            if (elapsedTime < AUTO_MIDDLE_FORWARD_TIME) {
+                //Move forward
+                drivetrain.arcadeDrive(1, 0);
+            } else {
+                //Spin!
+                drivetrain.arcadeDrive(0, 1);
+            }
         }
     }
 
