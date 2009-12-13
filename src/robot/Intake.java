@@ -17,7 +17,7 @@ public class Intake {
 
     private Joystick joystick;
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
-    private int intakeMode;
+    private int intakeMode, previousMode;
 
     /**
      * Creates our intake system.
@@ -33,6 +33,7 @@ public class Intake {
         this.unobtaniumMotor = unobtaniumMotor;
 
         intakeMode = 0;
+        previousMode = 0;
     }
 
     /**
@@ -53,14 +54,32 @@ public class Intake {
                 //Mode is not at intake
                 intakeMode = 1;
             }
-        } else if (joystick.getRawButton(3)) {
+        } else {
+            //TODO: Put this function into a function
+
+            /*
+             * Push button switch for both fire and reverse buttons
+             */
             //Reverse Button
-
-            //Check our mode, and change
-        } else if (joystick.getRawButton(1)) {
+            if (joystick.getRawButton(3)) {
+                //Reverse button was hit
+                previousMode = intakeMode;
+                intakeMode = -1;
+            } else if (!joystick.getRawButton(3) && intakeMode == -1) {
+                //We don't want to be in reverse anymore
+                intakeMode = previousMode;
+                previousMode = 0;
+            }
             //Fire Button
-
-            //Check our mode, and change
+            if (joystick.getRawButton(1)) {
+                //Fire button was hit
+                previousMode = intakeMode;
+                intakeMode = 2;
+            } else if (!joystick.getRawButton(1) && intakeMode == 2) {
+                //We don't want to be firing anymore
+                intakeMode = previousMode;
+                previousMode = 0;
+            }
         }
 
         //Put mode into action
