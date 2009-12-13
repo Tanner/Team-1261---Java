@@ -45,6 +45,7 @@ public class Intake {
         double beltSpeed = 0;
         double unobtaniumSpeed = 0;
 
+        //Set the mode of the system, based on our button input
         if (joystick.getRawButton(2)) {
             //Intake Button
             if (intakeMode == 1) {
@@ -79,6 +80,7 @@ public class Intake {
             }
         }
 
+        //Put our chosen mode into action!
         switch (intakeMode) {
             case -1:
                 //Reverse mode
