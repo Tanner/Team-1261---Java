@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.Victor;
  * directory.
  */
 public class LoganRover extends IterativeRobot {
-    public static final double AUTO_CORNER_FORWARD_TIME = 2000;
+    public static final double AUTO_CORNER_FORWARD_TIME = 2000; //Time for autonomous, in milliseconds
     public static final double AUTO_MIDDLE_FORWARD_TIME = 1000;
 
     private Joystick joystickOne;                   //Drive/Manipulator Joystick
