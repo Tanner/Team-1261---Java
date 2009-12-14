@@ -102,6 +102,11 @@ public class Intake {
                 beltSpeed = 1;
                 unobtaniumSpeed = 1;
                 break;
+            default:
+                //Ahhh! mode
+                beltSpeed = 0;
+                unobtaniumSpeed = 0;
+                break;
         }
 
         //Put mode into action
