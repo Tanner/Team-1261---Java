@@ -5,6 +5,7 @@
 
 package robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -18,6 +19,7 @@ public class Intake {
     private Joystick joystick;
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
     private int intakeMode, previousMode;
+    private DriverStation driverStation;
 
     /**
      * Creates our intake system.
@@ -34,14 +36,13 @@ public class Intake {
 
         intakeMode = 0;
         previousMode = 0;
+        driverStation = DriverStation.getInstance();
     }
 
     /**
      * Perform the actions that the mode we are in requires.
      */
     public void doAction() {
-        //TODO: Check whether these buttons are correct.
-
         double beltSpeed = 0;
         double unobtaniumSpeed = 0;
 
@@ -56,7 +57,7 @@ public class Intake {
                 intakeMode = 1;
             }
         } else {
-            //TODO: Put this function into a function
+            //TODO: Put this function into a function? Maybe...
 
             //Reverse Button
             if (joystick.getRawButton(3)) {
@@ -81,6 +82,7 @@ public class Intake {
         }
 
         //Put our chosen mode into action!
+        //TODO: Make sure values are in the correct direction.
         switch (intakeMode) {
             case -1:
                 //Reverse mode
@@ -99,7 +101,8 @@ public class Intake {
                 break;
             case 2:
                 //Fire mode
-                beltSpeed = 1;
+                //More to it than this, but I can't find the formula
+                beltSpeed = driverStation.getAnalogIn(1);
                 unobtaniumSpeed = 1;
                 break;
             default:
