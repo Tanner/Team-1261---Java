@@ -101,9 +101,9 @@ public class Intake {
                 break;
             case 2:
                 //Fire mode
+                beltSpeed = 1;
                 //More to it than this, but I can't find the formula
-                beltSpeed = driverStation.getAnalogIn(1);
-                unobtaniumSpeed = 1;
+                unobtaniumSpeed = driverStation.getAnalogIn(1);
                 break;
             default:
                 //Ahhh! mode
