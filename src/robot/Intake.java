@@ -47,7 +47,7 @@ public class Intake {
         double unobtaniumSpeed = 0;
 
         //Set the mode of the system, based on our button input
-        if (joystick.getRawButton(2)) {
+        if (joystick.getRawButton(3)) {
             //Intake Button
             if (intakeMode == 1) {
                 //Mode is at intake, ergo stop.
@@ -60,11 +60,11 @@ public class Intake {
             //TODO: Put this function into a function? Maybe...
 
             //Reverse Button
-            if (joystick.getRawButton(3)) {
+            if (joystick.getRawButton(2)) {
                 //Reverse button was hit
                 previousMode = intakeMode;
                 intakeMode = -1;
-            } else if (!joystick.getRawButton(3) && intakeMode == -1) {
+            } else if (!joystick.getRawButton(2) && intakeMode == -1) {
                 //We don't want to be in reverse anymore
                 intakeMode = previousMode;
                 previousMode = 0;
@@ -83,6 +83,7 @@ public class Intake {
 
         //Put our chosen mode into action!
         //TODO: Make sure values are in the correct direction.
+        System.out.println("Intake Mode:"+intakeMode);
         switch (intakeMode) {
             case -1:
                 //Reverse mode
