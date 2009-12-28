@@ -7,7 +7,6 @@
 
 package robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
@@ -19,12 +18,12 @@ import edu.wpi.first.wpilibj.Victor;
  * @package robot
  */
 public class Intake {
-    private Joystick joystick;
-    private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
-    private int intakeMode, previousMode;
-    private DriverStation driverStation;
+    private Joystick joystick;                                      //The manipulator joystick
+    private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;     //Our intake motor objects
 
-    private ButtonChange intakeButton;
+    private ButtonChange intakeButton;                              //Intake buttonChange object
+
+    private int intakeMode, previousMode;                           //Modes that the intake system is in
 
     /**
      * Creates our intake system.
@@ -42,8 +41,6 @@ public class Intake {
         //Set our mode to nothing so we don't go anywhere until they, the enlightened ones, tell us to.
         intakeMode = 0;
         previousMode = 0;
-
-        driverStation = DriverStation.getInstance();
         
         //Initialize button change object
         intakeButton = new ButtonChange(joystick, 3);
@@ -106,6 +103,7 @@ public class Intake {
         setBeltSpeed(beltSpeed);
         setUnobtaniumSpeed(unobtaniumSpeed);
 
+        //Set the previous state for our buttonChange object
         intakeButton.setPreviousState();
     }
 

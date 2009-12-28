@@ -62,6 +62,8 @@ public class LoganRover extends IterativeRobot {
         unobtaniumMotor = new Victor(5);
 
         drivetrain = new RobotDrive(leftDrive, rightDrive);
+
+        //Not sure why I have to do both front/rear of each side as I only have two motors?
         //Invert left side
         drivetrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         drivetrain.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
