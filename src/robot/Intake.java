@@ -91,10 +91,11 @@ public class Intake {
 
         //Put our chosen mode into action!
         //TODO: Make sure values are in the correct direction.
+        System.out.println("Intake Mode: "+intakeMode);
         switch (intakeMode) {
             case -1:
                 //Reverse mode
-                beltSpeed = -1;
+                beltSpeed = 1;
                 unobtaniumSpeed = 0;
                 break;
             case 0:
@@ -104,14 +105,13 @@ public class Intake {
                 break;
             case 1:
                 //Intake mode
-                beltSpeed = 1;
+                beltSpeed = -1;
                 unobtaniumSpeed = -0.5;
                 break;
             case 2:
                 //Fire mode
-                beltSpeed = 1;
-                //More to it than this, but I can't find the formula
-                unobtaniumSpeed = driverStation.getAnalogIn(1);
+                beltSpeed = -1;
+                unobtaniumSpeed = joystick.getThrottle();
                 break;
             default:
                 //Ahhh! mode
