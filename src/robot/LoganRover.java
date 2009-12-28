@@ -23,8 +23,11 @@ import edu.wpi.first.wpilibj.Victor;
  * directory.
  */
 public class LoganRover extends IterativeRobot {
-    public static final double AUTO_CORNER_FORWARD_TIME = 2000; //Time for autonomous, in milliseconds
-    public static final double AUTO_MIDDLE_FORWARD_TIME = 1000;
+    public static final double AUTO_CORNER_FORWARD_TIME = 2;    //Time for autonomous, in seconds
+    public static final double AUTO_MIDDLE_FORWARD_TIME = 1;
+    public static final double AUTO_FORWARD_SPEED       = -0.5; //Speeds for autonomous mode, forward speed
+    public static final double AUTO_RIGHT_SPIN_SPEED    = -1;   //Speeds for autonomous mode, right corner spin speed
+    public static final double AUTO_LEFT_SPIN_SPEED     = 1;    //Speeds for autonomous mode, left corner spin speed
 
     private Joystick joystickOne;                   //Drive/Manipulator Joystick
     
@@ -79,40 +82,41 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        //TODO: Is SimpleRobot better for our autonomous? Do I need to call isAutonomous()?
         //TODO: Clean up repetitive code in autonomous
         getWatchdog().feed();
 
-        double elapsedTime = autoTimer.get() * 0.001; //Convert time to milliseconds
+        double elapsedTime = autoTimer.get(); //Time is in seconds
+        System.out.println("Elapsed Time: "+elapsedTime);       
 
         //Perform whichever autonomous mode we chose from the switches
         if (leftAutoSwitch.get() == true && rightAutoSwitch.get() == false)
         {
             //Put us into left autonomous
-            if (elapsedTime < AUTO_CORNER_FORWARD_TIME) {
+            if (elapsedTime <= AUTO_CORNER_FORWARD_TIME) {
                 //Move forward
-                drivetrain.arcadeDrive(1, 0);
+                drivetrain.arcadeDrive(AUTO_FORWARD_SPEED, 0);
             } else {
                 //Spin!
-                drivetrain.arcadeDrive(0, 1);
+                drivetrain.arcadeDrive(0, AUTO_LEFT_SPIN_SPEED);
             }
         } else if (leftAutoSwitch.get() == false && rightAutoSwitch.get() == true) {
             //Put us into right autonomous
-            if (elapsedTime < AUTO_CORNER_FORWARD_TIME) {
+            if (elapsedTime <= AUTO_CORNER_FORWARD_TIME) {
                 //Move forward
-                drivetrain.arcadeDrive(1, 0);
+                drivetrain.arcadeDrive(AUTO_FORWARD_SPEED, 0);
             } else {
                 //Spin!
-                drivetrain.arcadeDrive(0, -1);
+                drivetrain.arcadeDrive(0, AUTO_RIGHT_SPIN_SPEED);
             }
         } else {
             //Middle position (both switches on or off)
             if (elapsedTime < AUTO_MIDDLE_FORWARD_TIME) {
                 //Move forward
-                drivetrain.arcadeDrive(1, 0);
+                drivetrain.arcadeDrive(AUTO_FORWARD_SPEED, 0);
             } else {
                 //Spin!
-                drivetrain.arcadeDrive(0, 1);
+                //Direction doesn't really matter at all...
+                drivetrain.arcadeDrive(0, AUTO_LEFT_SPIN_SPEED);
             }
         }
     }
