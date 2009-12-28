@@ -21,8 +21,7 @@ public class Intake {
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
     private int intakeMode, previousMode;
     private DriverStation driverStation;
-
-    private DebounceButton intakeButton;
+    private ButtonChange intakeButton;
 
     /**
      * Creates our intake system.
@@ -41,10 +40,8 @@ public class Intake {
         intakeMode = 0;
         previousMode = 0;
 
+        intakeButton = new ButtonChange(joystick, 3);
         driverStation = DriverStation.getInstance();
-
-        //Create a new debounce button on joystick @ button 3
-        intakeButton = new DebounceButton(joystick, 3);
     }
 
     /**
@@ -54,12 +51,8 @@ public class Intake {
         double beltSpeed = 0;
         double unobtaniumSpeed = 0;
 
-        //Update the button debounce values
-        intakeButton.checkButton();
-
         //Set the mode of the system, based on our button input
-        //if (joystick.getRawButton(3)) {
-        if (intakeButton.getButtonValue()) {
+        if (intakeButton.didButtonChange(true)) {
             //Intake Button
             if (intakeMode == 1) {
                 //Mode is at intake, ergo stop.
@@ -107,6 +100,8 @@ public class Intake {
         //Put mode into action
         setBeltSpeed(beltSpeed);
         setUnobtaniumSpeed(unobtaniumSpeed);
+
+        intakeButton.setPreviousState();
     }
 
     /**
