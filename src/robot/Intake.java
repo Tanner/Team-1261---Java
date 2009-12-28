@@ -129,7 +129,7 @@ public class Intake {
      */
     public void setBeltSpeed(double speed) {
         //As a safety measure of un-tested code, the following line is commented out to prevent *boom*
-        //beltMotorOne.set(speed);
+        beltMotorOne.set(speed);
         beltMotorTwo.set(speed);
     }
 
