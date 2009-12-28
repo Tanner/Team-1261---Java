@@ -7,6 +7,7 @@
 
 package robot;
 
+//Only import what we need, don't bog down the memory.
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -16,36 +17,36 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * Class runs all the robot code including autonomous and teleoperated periods.
+ *
+ * @author: Tanner Smith (creator)
+ * @package robot
  */
 public class LoganRover extends IterativeRobot {
     public static final double AUTO_CORNER_FORWARD_TIME = 2;    //Time for autonomous, in seconds
     public static final double AUTO_MIDDLE_FORWARD_TIME = 1;
+    
     public static final double AUTO_FORWARD_SPEED       = -0.5; //Speeds for autonomous mode, forward speed
     public static final double AUTO_RIGHT_SPIN_SPEED    = -1;   //Speeds for autonomous mode, right corner spin speed
     public static final double AUTO_LEFT_SPIN_SPEED     = 1;    //Speeds for autonomous mode, left corner spin speed
 
-    private Joystick joystickOne;                   //Drive/Manipulator Joystick
+    private Joystick joystickOne;                               //Drive/Manipulator Joystick
     
-    private DigitalInput leftAutoSwitch;            //Left Auto Switch
-    private DigitalInput rightAutoSwitch;           //Right Auto Switch
+    private DigitalInput leftAutoSwitch;                        //Left Auto Switch
+    private DigitalInput rightAutoSwitch;                       //Right Auto Switch
 
-    private Timer autoTimer;                        //Normally would use match time, but can't find that.
+    private Timer autoTimer;                                    //Normally would use match time, but can't find that.
     
-    private RobotDrive drivetrain;                  //Motors on Drivetrain
-    private Intake intake;                          //Intake System
+    private RobotDrive drivetrain;                              //Motors on Drivetrain
+    private Intake intake;                                      //Intake System
 
-    private Jaguar leftDrive, rightDrive;           //Drivetrain Motors
-    private Victor intakeMotorOne, intakeMotorTwo;  //Intake Motors
-    private Victor unobtaniumMotor;                 //Also part of intake system
+    private Jaguar leftDrive, rightDrive;                       //Drivetrain Motors
+    private Victor intakeMotorOne, intakeMotorTwo;              //Intake Motors
+    private Victor unobtaniumMotor;                             //Also part of intake system
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * This function is run when the robot is first started up and initializes any
+     * buttons, joysticks, or motors that the robot will use.
      */
     public void robotInit() {
         joystickOne = new Joystick(1);
@@ -75,6 +76,7 @@ public class LoganRover extends IterativeRobot {
      * This function is called before the beginning of autonomous.
      */
     public void autonomousInit() {
+        //Start the timer that is used for autonomous.
         autoTimer.start();
     }
 
@@ -82,11 +84,9 @@ public class LoganRover extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        //TODO: Clean up repetitive code in autonomous
         getWatchdog().feed();
 
         double elapsedTime = autoTimer.get(); //Time is in seconds
-        System.out.println("Elapsed Time: "+elapsedTime);       
 
         //Perform whichever autonomous mode we chose from the switches
         if (leftAutoSwitch.get() == true && rightAutoSwitch.get() == false)
@@ -125,6 +125,7 @@ public class LoganRover extends IterativeRobot {
      * This function is called before the beginning of teleop
      */
     public void teleopInit() {
+        //Get rid of that timer, we don't need it anymore.
         autoTimer.stop();
     }
 

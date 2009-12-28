@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
+ * Class that owns the intake system of the robot. Includes belts and unobtanium.
  *
- * @author tanner
+ * @author Tanner Smith (creator)
+ * @package robot
  */
 public class Intake {
-    //private enum mode {INTAKE, STOP, FIRE}
-
     private Joystick joystick;
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
     private int intakeMode, previousMode;
@@ -34,6 +34,7 @@ public class Intake {
         this.beltMotorTwo = beltMotorTwo;
         this.unobtaniumMotor = unobtaniumMotor;
 
+        //Set our mode to nothing so we don't go anywhere until they, the enlightened ones, tell us to.
         intakeMode = 0;
         previousMode = 0;
         driverStation = DriverStation.getInstance();
@@ -89,7 +90,6 @@ public class Intake {
         }
 
         //Put our chosen mode into action!
-        System.out.println("Intake Mode: "+intakeMode);
         switch (intakeMode) {
             case -1:
                 //Reverse mode
