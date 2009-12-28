@@ -62,7 +62,11 @@ public class Intake {
             //Reverse Button
             if (joystick.getRawButton(2)) {
                 //Reverse button was hit
-                previousMode = intakeMode;
+                if (intakeMode != -1)
+                {
+                    //No infinite loops allowed.
+                    previousMode = intakeMode;
+                }
                 intakeMode = -1;
             } else if (!joystick.getRawButton(2) && intakeMode == -1) {
                 //We don't want to be in reverse anymore
@@ -72,7 +76,11 @@ public class Intake {
             //Fire Button
             if (joystick.getRawButton(1)) {
                 //Fire button was hit
-                previousMode = intakeMode;
+                if (intakeMode != 2)
+                {
+                    //No infinite loops allowed.
+                    previousMode = intakeMode;
+                }
                 intakeMode = 2;
             } else if (!joystick.getRawButton(1) && intakeMode == 2) {
                 //We don't want to be firing anymore
@@ -83,7 +91,6 @@ public class Intake {
 
         //Put our chosen mode into action!
         //TODO: Make sure values are in the correct direction.
-        System.out.println("Intake Mode:"+intakeMode);
         switch (intakeMode) {
             case -1:
                 //Reverse mode
