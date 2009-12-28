@@ -18,6 +18,11 @@ import edu.wpi.first.wpilibj.Victor;
  * @package robot
  */
 public class Intake {
+    public static final int STOP    = 0;                            //Create constants of intake mode for easy reading...
+    public static final int INTAKE  = 1;
+    public static final int FIRE    = 2;
+    public static final int REVERSE = -1;
+
     private Joystick joystick;                                      //The manipulator joystick
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;     //Our intake motor objects
 
@@ -39,8 +44,8 @@ public class Intake {
         this.unobtaniumMotor = unobtaniumMotor;
 
         //Set our mode to nothing so we don't go anywhere until they, the enlightened ones, tell us to.
-        intakeMode = 0;
-        previousMode = 0;
+        intakeMode = STOP;
+        previousMode = STOP;
         
         //Initialize button change object
         intakeButton = new ButtonChange(joystick, 3);
@@ -56,12 +61,12 @@ public class Intake {
         //Set the mode of the system, based on our button input
         if (intakeButton.didButtonChange(true)) {
             //Intake Button - Only do this if we let go of the button
-            if (intakeMode == 1) {
+            if (intakeMode == INTAKE) {
                 //Mode is at intake, ergo stop.
-                intakeMode = 0;
+                intakeMode = STOP;
             } else {
                 //Mode is not at intake
-                intakeMode = 1;
+                intakeMode = INTAKE;
             }
         } else {
             //Reverse Button
@@ -72,22 +77,22 @@ public class Intake {
 
         //Put our chosen mode into action!
         switch (intakeMode) {
-            case -1:
+            case REVERSE:
                 //Reverse mode
                 beltSpeed = 1;
                 unobtaniumSpeed = 0;
                 break;
-            case 0:
+            case STOP:
                 //Stop mode
                 beltSpeed = 0;
                 unobtaniumSpeed = 0;
                 break;
-            case 1:
+            case INTAKE:
                 //Intake mode
                 beltSpeed = -1;
                 unobtaniumSpeed = 0.5;
                 break;
-            case 2:
+            case FIRE:
                 //Fire mode
                 beltSpeed = -1;
                 unobtaniumSpeed = -1;
@@ -127,7 +132,7 @@ public class Intake {
         } else if (!joystick.getRawButton(joystickButton) && intakeMode == desiredMode) {
             //We don't want to be acting anymore
             intakeMode = previousMode;
-            previousMode = 0;
+            previousMode = STOP;
         }
     }
 
