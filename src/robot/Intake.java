@@ -7,6 +7,7 @@ package robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -20,6 +21,8 @@ public class Intake {
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
     private int intakeMode, previousMode;
     private DriverStation driverStation;
+
+    private DebounceButton intakeButton;
 
     /**
      * Creates our intake system.
@@ -37,7 +40,9 @@ public class Intake {
         //Set our mode to nothing so we don't go anywhere until they, the enlightened ones, tell us to.
         intakeMode = 0;
         previousMode = 0;
+
         driverStation = DriverStation.getInstance();
+        intakeButton = new DebounceButton(joystick, 3);
     }
 
     /**
@@ -47,9 +52,12 @@ public class Intake {
         double beltSpeed = 0;
         double unobtaniumSpeed = 0;
 
+        intakeButton.checkButton();
+
         //Set the mode of the system, based on our button input
         //TODO: I think the intake button is boucing. Implement debouncing code to prove wrong.
-        if (joystick.getRawButton(3)) {
+        //if (joystick.getRawButton(3)) {
+        if (intakeButton.getButtonValue()) {
             //Intake Button
             if (intakeMode == 1) {
                 //Mode is at intake, ergo stop.
