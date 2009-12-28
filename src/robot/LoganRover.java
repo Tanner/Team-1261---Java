@@ -57,7 +57,7 @@ public class LoganRover extends IterativeRobot {
 
         leftDrive = new Jaguar(3);
         rightDrive = new Jaguar(1);
-        intakeMotorOne = new Victor(2);
+        intakeMotorOne = new Victor(2);     //Could set these in Intake, but this is nicer and easier to find.
         intakeMotorTwo = new Victor(4);
         unobtaniumMotor = new Victor(5);
 
