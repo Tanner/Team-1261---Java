@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.Victor;
  * Class runs all the robot code including autonomous and teleoperated periods.
  *
  * @author: Tanner Smith (creator)
+ * @robotName: Logan Rover
+ * @robotNamee: Logan Su
  * @package robot
  */
 public class LoganRover extends IterativeRobot {
@@ -32,8 +34,8 @@ public class LoganRover extends IterativeRobot {
 
     private Joystick joystickOne;                               //Drive/Manipulator Joystick
     
-    private DigitalInput leftAutoSwitch;                        //Left Auto Switch
-    private DigitalInput rightAutoSwitch;                       //Right Auto Switch
+    private DigitalInput leftAutoSwitch;                        //Left Auto Switch (on robot)
+    private DigitalInput rightAutoSwitch;                       //Right Auto Switch (on robot)
 
     private Timer autoTimer;                                    //Normally would use match time, but can't find that.
     
@@ -50,6 +52,7 @@ public class LoganRover extends IterativeRobot {
      */
     public void robotInit() {
         joystickOne = new Joystick(1);
+        
         leftAutoSwitch = new DigitalInput(1);
         rightAutoSwitch = new DigitalInput(2);
 
