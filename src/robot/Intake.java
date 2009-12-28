@@ -1,7 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) FIRST 2008. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
 package robot;
 
@@ -136,7 +138,6 @@ public class Intake {
      * @param speed Value of motor speed from -1 to 1
      */
     public void setBeltSpeed(double speed) {
-        //As a safety measure of un-tested code, the following line is commented out to prevent *boom*
         beltMotorOne.set(speed);
         beltMotorTwo.set(speed);
     }

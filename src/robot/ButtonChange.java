@@ -1,7 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) FIRST 2008. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
 package robot;
 
@@ -37,6 +39,7 @@ public class ButtonChange {
 
     /**
      * Check whether or not the button changed.
+     * See LabVIEW code for exactly how this works.... or figure it out on your own.
      * @param actOnRelease Did we release it or did we press it?
      * @return Whether or not the button changed.
      */
