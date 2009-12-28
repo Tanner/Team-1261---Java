@@ -55,9 +55,6 @@ public class Intake {
      * Perform the actions that the mode we are in requires.
      */
     public void doAction() {
-        double beltSpeed = 0;
-        double unobtaniumSpeed = 0;
-
         //Set the mode of the system, based on our button input
         if (intakeButton.didButtonChange(true)) {
             //Intake Button - Only do this if we let go of the button
@@ -76,6 +73,11 @@ public class Intake {
         }
 
         //Put our chosen mode into action!
+        //Positive beltSpeed        = Belts throw up (move balls down)
+        //Positive unobtaniumSpeed  = Unobtanium rolls backwards (balls stay in)
+        double beltSpeed = 0;
+        double unobtaniumSpeed = 0;
+
         switch (intakeMode) {
             case REVERSE:
                 //Reverse mode
