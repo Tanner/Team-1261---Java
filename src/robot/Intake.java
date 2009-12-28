@@ -100,7 +100,7 @@ public class Intake {
                 unobtaniumSpeed = -1;
                 break;
             default:
-                //Ahhh! mode
+                //Ahhh! mode - Just in case, full stop!
                 beltSpeed = 0;
                 unobtaniumSpeed = 0;
                 break;
@@ -143,6 +143,7 @@ public class Intake {
      * @param speed Value of motor speed from -1 to 1
      */
     public void setBeltSpeed(double speed) {
+        //Note: Speeds are identical as motors are in toughbox
         beltMotorOne.set(speed);
         beltMotorTwo.set(speed);
     }

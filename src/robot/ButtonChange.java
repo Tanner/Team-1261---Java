@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class ButtonChange {
 
-    Joystick joystick;
-    int buttonNumber;
+    Joystick joystick;      //The joystick I want to use
+    int buttonNumber;       //Which button I like better... and want to use
 
-    boolean previousState;
+    boolean previousState;  //The previous state of the button
 
     /**
      * Constructor.
@@ -34,6 +34,7 @@ public class ButtonChange {
      * Sets the previous state of the button after you check if it changed.
      */
     public void setPreviousState() {
+        //Could get the state from the method, but this is more reliable and error-free
         previousState = joystick.getRawButton(buttonNumber);
     }
 
@@ -46,9 +47,8 @@ public class ButtonChange {
     public boolean didButtonChange(boolean actOnRelease) {
         boolean currentState = joystick.getRawButton(buttonNumber);
 
-        System.out.println("Current State: "+currentState+" - Previous State: "+previousState+" Act On Release: "+actOnRelease);
-
         if (actOnRelease) {
+            //I want to know when the button releases
             if (currentState == false) {
                 if (previousState == false) {
                     return false;
@@ -59,6 +59,7 @@ public class ButtonChange {
                 return false;
             }
         } else {
+            //I want to know when the button is pushed
             if (currentState) {
                 if (previousState == false) {
                     return true;
