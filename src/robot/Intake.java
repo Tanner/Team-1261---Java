@@ -60,33 +60,9 @@ public class Intake {
             }
         } else {
             //Reverse Button
-            if (joystick.getRawButton(2)) {
-                //Reverse button was hit
-                if (intakeMode != -1)
-                {
-                    //No infinite loops allowed.
-                    previousMode = intakeMode;
-                }
-                intakeMode = -1;
-            } else if (!joystick.getRawButton(2) && intakeMode == -1) {
-                //We don't want to be in reverse anymore
-                intakeMode = previousMode;
-                previousMode = 0;
-            }
+            toggleModeFromJoystickButton(2, -1);
             //Fire Button
-            if (joystick.getRawButton(1)) {
-                //Fire button was hit
-                if (intakeMode != 2)
-                {
-                    //No infinite loops allowed.
-                    previousMode = intakeMode;
-                }
-                intakeMode = 2;
-            } else if (!joystick.getRawButton(1) && intakeMode == 2) {
-                //We don't want to be firing anymore
-                intakeMode = previousMode;
-                previousMode = 0;
-            }
+            toggleModeFromJoystickButton(1, 2);
         }
 
         //Put our chosen mode into action!
@@ -121,6 +97,30 @@ public class Intake {
         //Put mode into action
         setBeltSpeed(beltSpeed);
         setUnobtaniumSpeed(unobtaniumSpeed);
+    }
+
+    /**
+     * Switch the mode using the desired joystick button like a toggle switch.
+     * i.e. Press once turns it on or off depending on its current state
+     * @param joystickButton The joystick button you plan to use as a toggle button
+     * @param desiredMode The mode you want to goto with the toggle switch
+     */
+    public void toggleModeFromJoystickButton(int joystickButton, int desiredMode)
+    {
+        if (joystick.getRawButton(joystickButton)) {
+            //Joystick button was hit
+            if (intakeMode != desiredMode)
+            {
+                //Don't set the previous mode if I'm already in the new mode
+                //i.e. - No infinite loops!
+                previousMode = intakeMode;
+            }
+            intakeMode = desiredMode;
+        } else if (!joystick.getRawButton(joystickButton) && intakeMode == desiredMode) {
+            //We don't want to be acting anymore
+            intakeMode = previousMode;
+            previousMode = 0;
+        }
     }
 
     /**
