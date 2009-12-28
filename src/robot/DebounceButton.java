@@ -46,6 +46,7 @@ public class DebounceButton {
         {
             System.out.println("Debounce Time: "+(currentTime - lastDebounceTime)+" vs "+DEBOUNCE_DELAY+" - "+reading);
         }
+        
         if (currentTime - lastDebounceTime > DEBOUNCE_DELAY)
         {
             //Button state has been there for longer than the debounce delay

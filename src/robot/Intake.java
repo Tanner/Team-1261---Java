@@ -42,6 +42,8 @@ public class Intake {
         previousMode = 0;
 
         driverStation = DriverStation.getInstance();
+
+        //Create a new debounce button on joystick @ button 3
         intakeButton = new DebounceButton(joystick, 3);
     }
 
@@ -52,10 +54,10 @@ public class Intake {
         double beltSpeed = 0;
         double unobtaniumSpeed = 0;
 
+        //Update the button debounce values
         intakeButton.checkButton();
 
         //Set the mode of the system, based on our button input
-        //TODO: I think the intake button is boucing. Implement debouncing code to prove wrong.
         //if (joystick.getRawButton(3)) {
         if (intakeButton.getButtonValue()) {
             //Intake Button
