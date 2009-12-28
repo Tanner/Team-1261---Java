@@ -130,8 +130,10 @@ public class LoganRover extends IterativeRobot {
     public void teleopPeriodic() {
         getWatchdog().feed();
 
+        //Drive the robot
         drivetrain.arcadeDrive(joystickOne);
 
+        //Have the intake system (belts and unobtanium) perform to whatever mode it is in.
         intake.doAction();
     }
     

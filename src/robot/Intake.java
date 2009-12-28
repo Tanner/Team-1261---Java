@@ -47,6 +47,7 @@ public class Intake {
         double unobtaniumSpeed = 0;
 
         //Set the mode of the system, based on our button input
+        //TODO: I think the intake button is boucing. Implement debouncing code to prove wrong.
         if (joystick.getRawButton(3)) {
             //Intake Button
             if (intakeMode == 1) {
@@ -57,8 +58,6 @@ public class Intake {
                 intakeMode = 1;
             }
         } else {
-            //TODO: Put this function into a function? Maybe...
-
             //Reverse Button
             if (joystick.getRawButton(2)) {
                 //Reverse button was hit
@@ -90,7 +89,6 @@ public class Intake {
         }
 
         //Put our chosen mode into action!
-        //TODO: Make sure values are in the correct direction.
         System.out.println("Intake Mode: "+intakeMode);
         switch (intakeMode) {
             case -1:
@@ -106,12 +104,12 @@ public class Intake {
             case 1:
                 //Intake mode
                 beltSpeed = -1;
-                unobtaniumSpeed = -0.5;
+                unobtaniumSpeed = 0.5;
                 break;
             case 2:
                 //Fire mode
                 beltSpeed = -1;
-                unobtaniumSpeed = joystick.getThrottle();
+                unobtaniumSpeed = -1;
                 break;
             default:
                 //Ahhh! mode
