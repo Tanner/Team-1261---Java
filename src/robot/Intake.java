@@ -21,6 +21,7 @@ public class Intake {
     private Victor beltMotorOne, beltMotorTwo, unobtaniumMotor;
     private int intakeMode, previousMode;
     private DriverStation driverStation;
+
     private ButtonChange intakeButton;
 
     /**
@@ -40,8 +41,10 @@ public class Intake {
         intakeMode = 0;
         previousMode = 0;
 
-        intakeButton = new ButtonChange(joystick, 3);
         driverStation = DriverStation.getInstance();
+        
+        //Initialize button change object
+        intakeButton = new ButtonChange(joystick, 3);
     }
 
     /**
@@ -53,7 +56,7 @@ public class Intake {
 
         //Set the mode of the system, based on our button input
         if (intakeButton.didButtonChange(true)) {
-            //Intake Button
+            //Intake Button - Only do this if we let go of the button
             if (intakeMode == 1) {
                 //Mode is at intake, ergo stop.
                 intakeMode = 0;
