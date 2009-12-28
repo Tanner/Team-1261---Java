@@ -58,7 +58,12 @@ public class LoganRover extends IterativeRobot {
         unobtaniumMotor = new Victor(5);
 
         drivetrain = new RobotDrive(leftDrive, rightDrive);
+        //Invert left side
         drivetrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drivetrain.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        //Invert right side
+        drivetrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        drivetrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 
         intake = new Intake(joystickOne, intakeMotorOne, intakeMotorTwo, unobtaniumMotor);
     }
