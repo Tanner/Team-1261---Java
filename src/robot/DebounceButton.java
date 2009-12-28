@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
  * @author Tanner Smith (creator)
  */
 public class DebounceButton {
-    public static final long DEBOUNCE_DELAY = 105000;
+    public static final long DEBOUNCE_DELAY = 120000;
 
     private Joystick joystick;
     private int buttonNumber;
@@ -29,8 +29,7 @@ public class DebounceButton {
         this.buttonNumber = buttonNumber;
 
         timer = new Timer();
-        buttonState = false;
-        lastButtonState = true;
+        lastButtonState = false;
         lastDebounceTime = 0;
     }
 
@@ -43,12 +42,17 @@ public class DebounceButton {
             lastDebounceTime = currentTime;
         }
 
-        if (currentTime - lastDebounceTime > DEBOUNCE_DELAY)
+        if (currentTime - lastDebounceTime > 0)
         {
             System.out.println("Debounce Time: "+(currentTime - lastDebounceTime)+" vs "+DEBOUNCE_DELAY+" - "+reading);
+        }
+        if (currentTime - lastDebounceTime > DEBOUNCE_DELAY)
+        {
             //Button state has been there for longer than the debounce delay
             buttonState = reading;
         }
+
+        lastButtonState = reading;
     }
 
     public boolean getButtonValue() {
